@@ -14,22 +14,38 @@ describe("gatsby-node", () => {
     expect(node.frontmatter).toEqual({})
   })
 
-  it("should change top-level field marked as a path", () => {
-    const node = new Node({image: "/path/to/image.jpg"})
-    const relativePath = "./path/to/image.jpg"
-    utils.getRelativePath.mockImplementation(() => relativePath)
+  describe("when pluginOptions includes a pathsFields", () => {
+    const pluginOptions = {pathFields: ["image"]}
+    it("should convert fields listed in pathFields", () => {
+      const node = new Node({image: "/path/to/image.jpg"})
+      const relativePath = "./path/to/image.jpg"
+      utils.getRelativePath.mockImplementation(() => relativePath)
 
-    onCreateNode({node}, pluginOptions)
+      onCreateNode({node}, pluginOptions)
 
-    expect(node.frontmatter).toEqual({image: relativePath})
+      expect(node.frontmatter).toEqual({image: relativePath})
+    })
+
+    it("should not convert fields not listed in pathFields", () => {
+      const node = new Node({not_an_image: "/path/to/image.jpg"})
+
+      onCreateNode({node}, pluginOptions)
+
+      expect(node.frontmatter).toEqual({not_an_image: "/path/to/image.jpg"})
+    })
   })
 
-  it("should not change top-level field that's not been marked as a field", () => {
-    const node = new Node({not_an_image: "/path/to/image.jpg"})
+  describe("when pluginOptions does not include pathsFields", () => {
+    const pluginOptions = {pathFields: undefined}
 
-    onCreateNode({node}, pluginOptions)
+    it("should convert any string starting with '/' into a relative path", () => {
+      utils.getRelativePath.mockImplementation(() => "./something.jpg")
+      const node = new Node({not_an_imag: "/something"})
 
-    expect(node.frontmatter).toEqual({not_an_image: "/path/to/image.jpg"})
+      onCreateNode({node}, pluginOptions)
+
+      expect(node.frontmatter).toEqual({not_an_imag: "./something.jpg"})
+    })
   })
 })
 
