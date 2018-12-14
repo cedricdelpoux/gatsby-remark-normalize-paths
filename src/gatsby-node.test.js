@@ -72,7 +72,7 @@ describe("gatsby-node", () => {
       onCreateNode({node}, pluginOptions)
 
       expect(node.frontmatter).not.toEqual({
-        authors: [{portrait: "./something.jpg"}],
+        author: [{portrait: "./something.jpg"}],
       })
     })
   })
