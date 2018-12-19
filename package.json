@@ -16,7 +16,6 @@
   ],
   "main": "index.js",
   "dependencies": {
-    "each-props": "^1.3.2",
     "is-valid-path": "^0.1.1",
     "path": "^0.12.7",
     "unist-util-visit": "^1.4.0"
