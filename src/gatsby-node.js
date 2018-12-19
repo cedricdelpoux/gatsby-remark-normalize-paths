@@ -19,6 +19,8 @@ function normalizePath(path, nodeInfo) {
   if (path && isString && isAbsolute(path)) {
     return getRelativePath(fileAbsolutePath, path)
   }
+
+  return path
 }
 
 function normalizeArray(arr, nodeInfo) {
