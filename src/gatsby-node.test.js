@@ -14,7 +14,7 @@ describe("gatsby-node", () => {
     expect(node.frontmatter).toEqual({})
   })
 
-  describe("when pluginOptions includes a pathsFields", () => {
+  describe("when pluginOptions includes a pathFields", () => {
     const pluginOptions = {pathFields: ["image"]}
     it("should convert fields listed in pathFields", () => {
       const node = new Node({image: "/path/to/image.jpg"})
@@ -28,6 +28,7 @@ describe("gatsby-node", () => {
 
     it("should not convert fields not listed in pathFields", () => {
       const node = new Node({not_an_image: "/path/to/image.jpg"})
+      utils.getRelativePath.mockImplementation(() => "./something.jpg")
 
       onCreateNode({node}, pluginOptions)
 
@@ -62,16 +63,18 @@ describe("gatsby-node", () => {
 
       onCreateNode({node}, pluginOptions)
 
-      expect(node.frontmatter).toEqual({gallery: ["/something", "/toot"]})
+      expect(node.frontmatter).toEqual({
+        gallery: ["./something.jpg", "./something.jpg"],
+      })
     })
 
-    it("should not convert fields of objects nested in arrays", () => {
+    it("should convert fields of objects nested in arrays", () => {
       utils.getRelativePath.mockImplementation(() => "./something.jpg")
       const node = new Node({author: [{portrait: "/something"}]})
 
       onCreateNode({node}, pluginOptions)
 
-      expect(node.frontmatter).not.toEqual({
+      expect(node.frontmatter).toEqual({
         author: [{portrait: "./something.jpg"}],
       })
     })
