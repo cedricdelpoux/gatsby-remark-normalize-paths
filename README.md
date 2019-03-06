@@ -4,11 +4,11 @@
 
 `gatsby-remark-normalize-paths` normalize your paths to be gatsby compliant.
 
-It find absolute paths deeply in the frontmatter and the body of your markdown files and transform them to relative paths. If you have empty fields, it delete them (optional).
+It finds absolute paths deeply in the frontmatter and the body of your markdown files and transforms them to relative paths. If you have empty fields, it deletes them (optional).
 
 ## Usecase
 
--   You use a CMS (eg: [Netlify-cms](https://github.com/netlify/netlify-cms)) to manage your markdown files but it do not format paths like gatsby want to.
+-   You use a CMS (eg: [Netlify-cms](https://github.com/netlify/netlify-cms)) to manage your markdown files but it does not format gatsby-friendly paths.
 -   You use `gatsby-transformer-sharp` and your images fields should not be empty to avoid the error `GraphQL Error Field must not have a selection since type "String" has no subfields` when you build,
 
 Let's imagine your gatsby data structure is the following:
@@ -29,7 +29,7 @@ Let's imagine your gatsby data structure is the following:
   ↳ static
 ```
 
-And your markdown files containing absolute paths:
+And your markdown files contain absolute paths:
 
 ```markdown
 ---
@@ -44,7 +44,7 @@ images:
 Lorem ipsum ![](/content/images/image-5.jpg) Lorem ipsum
 ```
 
-In your markdown frontmatter or body, you can use absolute paths (`/content/images/image-1.jpg`) and it will be convert to relative paths (`../images/image-1.jpg`)
+In your markdown frontmatter or body, you can use absolute paths (`/content/images/image-1.jpg`) and they will be converted to relative paths (`../images/image-1.jpg`)
 
 ## Getting started
 
@@ -87,7 +87,7 @@ module.exports = {
 ```
 
 > Note:
-> If you don't want this plugin delete empty frontmatter of some fields, you need to specify pathFields
+> If you don't want this plugin to delete empty frontmatter of some fields, you need to specify pathFields
 
 ## Contributing
 
