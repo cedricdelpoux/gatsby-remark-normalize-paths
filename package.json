@@ -25,6 +25,7 @@
     "cross-env": "^7.0.2",
     "eslint": "^7.10.0",
     "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-jest": "^24.0.2",
     "husky": "^4.3.0",
     "jest": "^23.6.0",
     "lint-staged": "^10.4.0",
@@ -36,7 +37,7 @@
   "scripts": {
     "build": "cross-env BABEL_ENV=production babel src --out-dir .",
     "lint": "eslint --ext .js src",
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "yarn lint && yarn test && yarn build",
     "test": "jest"
   },
   "husky": {
