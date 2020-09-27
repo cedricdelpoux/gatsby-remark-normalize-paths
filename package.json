@@ -1,5 +1,5 @@
 {
-  "name": "@forestryio/gatsby-remark-normalize-paths",
+  "name": "gatsby-remark-normalize-paths",
   "version": "1.0.0",
   "description": "Normalize paths in frontmatter and body of markdown files to be gatsby compliant",
   "repository": "https://github.com/xuopled/gatsby-remark-normalize-paths",
