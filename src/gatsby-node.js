@@ -4,7 +4,7 @@ const isValidPath = require("is-valid-path")
 const {getRelativePath} = require("./utils.js")
 
 function normalizePath(path, nodeInfo) {
-  const {fileAbsolutePath, prefix} = nodeInfo
+  const {fileAbsolutePath} = nodeInfo
   const isString = typeof path === "string"
 
   // Stop if field is not a valid path
@@ -16,7 +16,7 @@ function normalizePath(path, nodeInfo) {
   }
   // Normalize path field from absolute to relative
   if (path && isString && isAbsolute(path)) {
-    return getRelativePath(fileAbsolutePath, path, prefix)
+    return getRelativePath(fileAbsolutePath, path)
   }
 
   return path
@@ -67,6 +67,5 @@ exports.onCreateNode = ({node}, pluginOptions) => {
   node.frontmatter = normalizeObject(node.frontmatter, {
     pathFields: pluginOptions.pathFields,
     fileAbsolutePath: node.fileAbsolutePath,
-    prefix: pluginOptions.prefix,
   })
 }

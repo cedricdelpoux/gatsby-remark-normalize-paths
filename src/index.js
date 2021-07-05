@@ -3,13 +3,13 @@ const visit = require(`unist-util-visit`)
 
 const {getRelativePath} = require(`./utils.js`)
 
-module.exports = ({getNode, markdownAST, markdownNode}) => {
+module.exports = ({getNode, markdownAST, markdownNode}, { prefix }) => {
   visit(markdownAST, `image`, node => {
     const isAbsoluteUrl = isAbsolute(node.url)
     const {absolutePath} = getNode(markdownNode.parent)
 
     if (node.url && isAbsoluteUrl) {
-      node.url = getRelativePath(absolutePath, node.url)
+      node.url = getRelativePath(absolutePath, node.url, prefix)
     }
   })
 }
