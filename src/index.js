@@ -12,22 +12,15 @@ module.exports = ({getNode, markdownAST, markdownNode}, pluginOptions) => {
     const {absolutePath} = getNode(markdownNode.parent)
 
     if (node.url && isAbsoluteUrl) {
-      const imagePath = getRelativePath(absolutePath, node.url, prefix)
-      const fullPath = `${__dirname}/${imagePath}`
+      const newPath = prefix ? `${prefix}${node.url}` : node.url
+      const fullPath = `${process.cwd()}/${newPath}`
 
-      fs.access(fullPath, fs.F_OK, (error) => {
-        if (error) {
-          if (error.code === "ENOENT") {
-            console.error(
-              `Check ${absolutePath} where the following image could not be found: ${imagePath}`
-            )
-            return
-          }
-
-          console.error(error)
-          return
-        }
-      })
+      if (!fs.existsSync(fullPath)) {
+        console.error(
+          `Check the following file:\n${absolutePath}\n\nWhere the following image could not be found:\n${node.url}`
+        )
+        return
+      }
 
       node.url = getRelativePath(absolutePath, node.url, prefix)
     }
