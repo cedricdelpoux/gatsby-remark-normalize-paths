@@ -12,8 +12,8 @@ module.exports = ({getNode, markdownAST, markdownNode}, pluginOptions) => {
     const {absolutePath} = getNode(markdownNode.parent)
 
     if (node.url && isAbsoluteUrl) {
-      const newPath = prefix ? `${prefix}${node.url}` : node.url
-      const fullPath = `${process.cwd()}/${newPath}`
+      const newPath = prefix ? `/${prefix}${node.url}` : node.url
+      const fullPath = `${process.cwd()}${newPath}`
 
       if (!fs.existsSync(fullPath)) {
         console.error(

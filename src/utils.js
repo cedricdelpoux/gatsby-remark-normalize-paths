@@ -8,7 +8,7 @@ function getRelativePath(fileAbsolutePath, path, prefix) {
     ""
   )
 
-  const newPath = prefix ? `${prefix}${path}` : path
+  const newPath = prefix ? `/${prefix}${path}` : path
 
   return relative(nodeFileRelativeDir, newPath)
 }
