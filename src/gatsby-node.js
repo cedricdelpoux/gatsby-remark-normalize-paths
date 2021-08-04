@@ -14,7 +14,6 @@ function normalizePath(path, nodeInfo) {
       return undefined
     }
   }
-
   // Normalize path field from absolute to relative
   if (path && isString && isAbsolute(path)) {
     return getRelativePath(fileAbsolutePath, path)
