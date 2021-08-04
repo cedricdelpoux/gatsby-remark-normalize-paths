@@ -1,5 +1,5 @@
 const fs = require("fs")
-const {isAbsolute} = require("path")
+const {isAbsolute, join} = require("path")
 const visit = require(`unist-util-visit`)
 
 const {getRelativePath} = require(`./utils.js`)
@@ -12,7 +12,7 @@ module.exports = ({getNode, markdownAST, markdownNode}, pluginOptions) => {
     const {absolutePath} = getNode(markdownNode.parent)
 
     if (node.url && isAbsoluteUrl) {
-      const newPath = prefix ? `/${prefix}${node.url}` : node.url
+      const newPath = prefix ? join(`/${prefix}`, node.url) : node.url
       const fullPath = `${process.cwd()}${newPath}`
 
       if (!fs.existsSync(fullPath)) {

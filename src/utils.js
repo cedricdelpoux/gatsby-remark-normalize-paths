@@ -1,4 +1,4 @@
-const {relative, dirname} = require("path")
+const {relative, dirname, join} = require("path")
 
 function getRelativePath(fileAbsolutePath, path, prefix) {
   const currentAbsoluteDir = process.cwd()
@@ -8,7 +8,7 @@ function getRelativePath(fileAbsolutePath, path, prefix) {
     ""
   )
 
-  const newPath = prefix ? `/${prefix}${path}` : path
+  const newPath = prefix ? join(`/${prefix}`, path) : path
 
   return relative(nodeFileRelativeDir, newPath)
 }
