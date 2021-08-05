@@ -1,3 +1,13 @@
+What's different in this forked version?
+
+Primarily, it's the addition of `prefix` option in `pluginOptions`
+
+This means that if you have a number of images referenced as `/image/location/img-123.jpg`, setting `prefix` to `content` will transform the image path to `/content/image/location/img-123.jpg`
+
+These changes [have been proposed](https://github.com/cedricdelpoux/gatsby-remark-normalize-paths/pull/13) to the author of the plugin. If these have been merged since, then assume this fork outdated.
+
+---
+
 <div align="center">
   <h1>gatsby-remark-normalize-paths</h1>
 
