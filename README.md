@@ -85,6 +85,9 @@ module.exports = {
                         resolve: "gatsby-remark-normalize-paths",
                         options: {
                             pathFields: ["image", "cover"],
+                            // Will change your image path from /image/location/img-123.jpg
+                            // to /content/image/location/img-123.jpg
+                            prefix: "content"
                         },
                     },
                 ],
